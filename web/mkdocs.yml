@@ -8,7 +8,8 @@ site_author: Organization Agent Swarm maintainers
 docs_dir: docs
 site_dir: site
 
-# No site_url yet (no verified canonical/production URL).
+# Canonical project URL (GitHub Pages project site; no custom domain).
+site_url: https://andrewluxem.github.io/organization-agent-swarm/
 # No custom domain, no analytics, no cookie consent, no external social links.
 repo_name: organization-agent-swarm
 
