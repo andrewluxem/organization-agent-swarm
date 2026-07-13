@@ -1,0 +1,30 @@
+# Local agent state
+.claude/agent-memory-local/
+.cursor/subagents/
+.opencode/cache/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+
+# OS/editor
+.DS_Store
+Thumbs.db
+
+# Documentation site (local artifacts, never committed)
+.venv-docs/
+web/site/
+
+# Documentation quality tooling (local artifacts, never committed)
+web/node_modules/
+node_modules/
+web/.lighthouseci/
+.lighthouseci/
+web/pa11y-report.*
+*.lhr.json
+npm-debug.log*

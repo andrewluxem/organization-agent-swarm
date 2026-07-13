@@ -1,0 +1,121 @@
+/*
+ * Restrained, accessible overrides for Organization Agent Swarm docs.
+ * System fonts only. No remote assets, no JavaScript, no tracking, no
+ * decorative animation required to understand content.
+ */
+
+:root {
+  --md-text-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --md-code-font: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+}
+
+/* Comfortable, readable line length for body content. */
+.md-typeset {
+  font-size: 0.85rem;
+}
+
+.md-grid {
+  max-width: 60rem;
+}
+
+/* Clearly visible keyboard focus for interactive elements. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+summary:focus-visible,
+.md-nav__link:focus-visible,
+.md-tabs__link:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Responsive, horizontally scrollable tables and code blocks. */
+.md-typeset table:not([class]) {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.md-typeset pre {
+  overflow-x: auto;
+}
+
+/* Wrap long inline code instead of overflowing the reading column. */
+.md-typeset code {
+  overflow-wrap: anywhere;
+}
+
+/* Respect users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Accessibility: keep top-navigation tab labels at full contrast against the
+   primary-colored tabs bar (WCAG 2.1 AA, 1.4.3 Contrast). */
+.md-tabs__link {
+  opacity: 1;
+}
+
+/* Accessibility: the theme's footer copyright text (.md-copyright) uses
+   --md-footer-fg-color--lighter (white at ~0.45 alpha), which sits at the
+   ~4.5:1 boundary over the semi-transparent footer bar and fails automated
+   contrast checks on some renderers. Promote it to --md-footer-fg-color--light
+   (white at ~0.7 alpha), the same token the footer links already use, so the
+   copyright text clears WCAG 2.1 AA (~9:1) in both the default and slate
+   schemes; the footer link and its focus/hover states are unchanged
+   (WCAG 2.1 AA, 1.4.3 Contrast). */
+.md-copyright {
+  color: var(--md-footer-fg-color--light);
+}
+
+/* Accessibility: distinguish in-content links without relying on color alone
+   (WCAG 2.1 AA, 1.4.1 Use of Color) by underlining links within article
+   content. Navigation, tabs, and footer links are unaffected. */
+.md-typeset a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.md-typeset a:hover,
+.md-typeset a:focus {
+  text-decoration: underline;
+}
+
+/* Accessibility: the vendored Mermaid runtime renders node labels as HTML inside
+   SVG <foreignObject>. Give those labels an explicit high-contrast color and a
+   defined (opaque white) background so automated contrast checks evaluate them
+   correctly against a real background rather than a transparent one. The nodes
+   are themed white, so a white label background is visually seamless. The
+   diagram is presentational; the adjacent Hierarchy outline is its text
+   equivalent. */
+svg[id^="mermaid"] foreignObject div,
+svg[id^="mermaid"] foreignObject span,
+svg[id^="mermaid"] foreignObject p,
+svg[id^="mermaid"] .nodeLabel,
+svg[id^="mermaid"] .edgeLabel {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+/* Accessibility: give the on-demand "Render diagram" control an explicit,
+   solid, high-contrast style (white on indigo 700 ~= 9:1) instead of the
+   theme's default outlined button, whose indigo-500 text is only ~4.2:1 on
+   white (WCAG 2.1 AA, 1.4.3 Contrast). */
+.md-typeset .md-button[data-mermaid-render] {
+  color: #ffffff;
+  background-color: #303f9f;
+  border-color: #303f9f;
+}
+
+.md-typeset .md-button[data-mermaid-render]:hover,
+.md-typeset .md-button[data-mermaid-render]:focus {
+  color: #ffffff;
+  background-color: #1a237e;
+  border-color: #1a237e;
+}

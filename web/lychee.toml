@@ -1,0 +1,42 @@
+# Lychee link checker configuration for the Organization Agent Swarm docs.
+#
+# Two behaviors are intended (driven by how lychee is invoked in CI):
+#
+#   1. Required internal check: run with `--offline` over web/docs Markdown and
+#      the root public/governance Markdown. Internal links and fragments must
+#      resolve; this check must pass.
+#
+#   2. External check: run online over the built web/site HTML and Markdown.
+#      External links are retried; only the narrowly documented hosts below are
+#      excepted. Failures are surfaced for review rather than hidden.
+#
+# This file does NOT globally ignore 403/429 or vendor-host failures.
+
+# Retries and timeouts for flaky external hosts.
+max_retries = 3
+retry_wait_time = 2
+timeout = 30
+max_concurrency = 8
+
+# Fragment (#anchor) checking for the required internal run is enabled by the
+# workflow's explicit `--include-fragments` CLI flag. In Lychee 0.24.2
+# `include_fragments` is string-typed; a config value is intentionally omitted so
+# fragment checking stays scoped to the internal invocation.
+
+# Success codes. 403/429 are deliberately NOT accepted globally.
+accept = ["200", "206", "301", "302", "308"]
+
+# Do not check mail links or loopback/local-dev servers.
+include_mail = false
+exclude_loopback = true
+
+# Narrow, documented exceptions (require periodic manual review):
+exclude = []
+
+# Documented per-path exclusion. Values are treated as regular expressions;
+# keep this list minimal and review it manually. Do not add blanket host or
+# status-code ignores.
+# The vendored, checksummed third-party Mermaid bundle is not link-checked.
+exclude_path = [
+  "web/docs/assets/vendor/",
+]

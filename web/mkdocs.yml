@@ -1,0 +1,118 @@
+site_name: Organization Agent Swarm
+site_description: >-
+  An independent, portable 20-agent team modeled as a worldwide marketing and
+  advertising organization, built from common capability-oriented patterns for
+  use with multiple coding-agent clients.
+site_author: Organization Agent Swarm maintainers
+
+docs_dir: docs
+site_dir: site
+
+# No site_url yet (no verified canonical/production URL).
+# No custom domain, no analytics, no cookie consent, no external social links.
+repo_name: organization-agent-swarm
+
+theme:
+  name: material
+  language: en
+  font: false
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.top
+    - navigation.tracking
+    - toc.follow
+    - content.code.copy
+    - search.highlight
+    - search.suggest
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+# Local-only Mermaid runtime (vendored under assets/vendor/mermaid/); no CDN.
+extra_javascript:
+  - assets/javascripts/a11y-enhance.js
+  - assets/vendor/mermaid/mermaid-init.js
+
+plugins:
+  - search
+
+# Generated partials are transcluded via snippets; they are not standalone pages.
+exclude_docs: |
+  _generated/
+  assets/vendor/mermaid/PROVENANCE.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - def_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.snippets:
+      base_path:
+        - web/docs
+      check_paths: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - Home: index.md
+  - Overview:
+      - organization/index.md
+      - Team chart: organization/team-chart.md
+      - Operating model: organization/operating-model.md
+      - Decision rights: organization/decision-rights.md
+  - Roster:
+      - roster/index.md
+      - Affiliate Marketing: roster/affiliate-marketing.md
+      - Automated Advertising: roster/automated-advertising.md
+      - Consumer Marketing Analytics: roster/consumer-marketing-analytics.md
+  - Get Started:
+      - install/index.md
+      - Project scope: install/project-scope.md
+      - User scope: install/user-scope.md
+      - Verify: install/verify.md
+      - Supported clients:
+          - clients/index.md
+          - Claude Code: clients/claude-code.md
+          - Codex: clients/codex.md
+          - Cursor: clients/cursor.md
+          - OpenCode: clients/opencode.md
+      - Workflows:
+          - workflows/index.md
+          - Cross-functional launch: workflows/cross-functional-launch.md
+          - Lifecycle campaign: workflows/lifecycle-campaign.md
+          - Organic growth: workflows/organic-growth.md
+      - Examples:
+          - examples/index.md
+          - Kickoff prompts: examples/kickoff-prompts.md
+  - Customize:
+      - customize/index.md
+      - Edit the roster: customize/roster.md
+      - Build and validate: customize/build-and-validate.md
+      - Task packet reference: reference/task-packet.md
+  - Governance:
+      - governance/index.md
+      - Execution modes: governance/execution-modes.md
+      - Release gates: governance/release-gates.md
+      - Handoff contract: governance/handoff-contract.md
+      - Security: governance/security.md
+      - Contributing: governance/contributing.md

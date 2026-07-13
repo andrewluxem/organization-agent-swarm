@@ -1,0 +1,70 @@
+name: Feature request
+description: Propose an enhancement to the roster, adapters, scripts, or docs.
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion. For open-ended design or usage questions,
+        prefer GitHub Discussions (once enabled) over a feature request.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or motivation
+      description: What problem does this solve? What is the current limitation?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: |
+        Describe the change. Remember that agent content is generated from
+        swarm/roster.json — describe roster or template changes, not hand edits
+        to generated files.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected client or adapter
+      options:
+        - Claude Code (.claude/agents)
+        - Codex (.codex/agents)
+        - Cursor (.cursor/agents)
+        - OpenCode (.opencode/agents)
+        - Canonical prompts (canonical/agents)
+        - Roster (swarm/roster.json)
+        - Scripts (build_adapters.py / validate_swarm.py)
+        - Documentation
+        - Other / cross-cutting
+    validations:
+      required: true
+  - type: dropdown
+    id: breaking
+    attributes:
+      label: Breaking-change disclosure
+      description: Would this change agent ids, titles, or the reporting hierarchy?
+      options:
+        - "No breaking change"
+        - "Yes — changes ids, titles, or hierarchy"
+        - "Not sure"
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other approaches you evaluated, and why you prefer this one.
+    validations:
+      required: false
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmations
+      options:
+        - label: This request contains no secrets, credentials, PII, or proprietary material.
+          required: true
+        - label: I understand generated agent directories must not be edited by hand.
+          required: true

@@ -1,0 +1,16 @@
+# Code owners for Organization Agent Swarm
+# Syntax: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+#
+# The verified maintainer owns the repository by default. Generated agent
+# directories and the authoritative roster are owned to protect the
+# generator contract.
+
+* @andrewluxem
+
+/swarm/roster.json @andrewluxem
+/scripts/ @andrewluxem
+/canonical/agents/ @andrewluxem
+/.claude/agents/ @andrewluxem
+/.codex/agents/ @andrewluxem
+/.cursor/agents/ @andrewluxem
+/.opencode/agents/ @andrewluxem

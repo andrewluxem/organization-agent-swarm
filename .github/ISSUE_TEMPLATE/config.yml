@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and design discussion
+    url: https://github.com/andrewluxem/organization-agent-swarm/discussions
+    about: Use GitHub Discussions (once enabled) for how-to and design questions. See SUPPORT.md.
+  - name: Report a security vulnerability
+    url: https://github.com/andrewluxem/organization-agent-swarm/security/advisories/new
+    about: Do not file public issues for vulnerabilities. Use private reporting per SECURITY.md.

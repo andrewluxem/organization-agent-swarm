@@ -1,0 +1,4 @@
+# Vendored, checksummed third-party runtime assets are upstream minified files.
+# Do not apply whitespace checks or count them in language statistics; their
+# integrity is verified by the checksums in the adjacent PROVENANCE.md.
+web/docs/assets/vendor/** -whitespace linguist-vendored

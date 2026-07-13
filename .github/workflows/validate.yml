@@ -1,0 +1,138 @@
+# Validation-only CI for Organization Agent Swarm.
+#
+# This workflow validates the repository, the generated artifacts, and the
+# documentation site. It performs NO deployment: it never publishes, pushes,
+# or configures GitHub Pages, and it requests only read access.
+#
+# Action pinning: every third-party action is pinned to a full 40-character
+# commit SHA, with the human-readable release tag in a trailing comment. The
+# SHAs were resolved from and verified against the expected upstream
+# repositories (actions/checkout, actions/setup-python, actions/setup-node).
+# The gitleaks and lychee CLIs are invoked directly (no marketplace wrappers).
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Least privilege: read-only. No pages:write, id-token:write, deployments:write,
+# issues:write, or pull-requests:write anywhere in this workflow.
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  repo-validation:
+    name: Repository and generator validation
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Set up Python
+        uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
+        with:
+          python-version: "3.12"
+      - name: Install documentation dependencies
+        run: python -m pip install -r web/requirements-docs.txt
+      - name: Generator and structural validation
+        run: |
+          python3 scripts/build_adapters.py --check
+          python3 scripts/build_docs.py --check
+          python3 scripts/validate_swarm.py
+      - name: Strict documentation build
+        run: mkdocs build --strict -f web/mkdocs.yml
+      - name: Public-content scan
+        run: python3 scripts/check_public_content.py
+      - name: Whitespace and conflict-marker check
+        run: git diff --check
+
+  accessibility-performance:
+    name: Accessibility and performance
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Set up Python
+        uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
+        with:
+          python-version: "3.12"
+      - name: Install documentation dependencies
+        run: python -m pip install -r web/requirements-docs.txt
+      - name: Build the static site
+        run: mkdocs build --strict -f web/mkdocs.yml
+      - name: Set up Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version-file: web/.node-version
+      - name: Install Node dependencies
+        run: npm ci --prefix web
+      - name: Serve site, then run Pa11y CI and Lighthouse CI
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --directory web/site &
+          SERVER_PID=$!
+          trap 'kill "${SERVER_PID}" 2>/dev/null || true' EXIT
+          for i in $(seq 1 30); do
+            if curl -sf -o /dev/null http://localhost:8000/; then break; fi
+            sleep 1
+          done
+          npm --prefix web run test:a11y
+          npm --prefix web run test:lighthouse
+
+  link-validation:
+    name: Link validation
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Set up Python
+        uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
+        with:
+          python-version: "3.12"
+      - name: Install documentation dependencies
+        run: python -m pip install -r web/requirements-docs.txt
+      - name: Build the static site
+        run: mkdocs build --strict -f web/mkdocs.yml
+      - name: Install lychee (pinned release, checksum-verified)
+        run: |
+          set -euo pipefail
+          LYCHEE_VERSION="0.24.2"
+          LYCHEE_TAG="lychee-v${LYCHEE_VERSION}"
+          ASSET="lychee-x86_64-unknown-linux-gnu.tar.gz"
+          BASE="https://github.com/lycheeverse/lychee/releases/download/${LYCHEE_TAG}"
+          curl -fsSL -o "${ASSET}" "${BASE}/${ASSET}"
+          curl -fsSL -o "${ASSET}.sha256" "${BASE}/${ASSET}.sha256"
+          sha256sum -c "${ASSET}.sha256"
+          tar -xzf "${ASSET}" \
+            --strip-components=1 \
+            lychee-x86_64-unknown-linux-gnu/lychee
+          sudo mv lychee /usr/local/bin/lychee
+          lychee --version
+      - name: Required internal link and fragment check
+        run: lychee --offline --include-fragments --config web/lychee.toml web/docs README.md CONTRIBUTING.md SECURITY.md SUPPORT.md CODE_OF_CONDUCT.md DISCLAIMER.md CHANGELOG.md
+      - name: External link check (surfaced for review)
+        continue-on-error: true
+        run: lychee --config web/lychee.toml web/site
+
+  secret-scan:
+    name: Secret scanning
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Install gitleaks (pinned release)
+        run: |
+          set -euo pipefail
+          GITLEAKS_VERSION="8.30.1"
+          ASSET="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          curl -fsSL -o "${ASSET}" "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/${ASSET}"
+          tar -xzf "${ASSET}" gitleaks
+          sudo mv gitleaks /usr/local/bin/gitleaks
+          gitleaks version
+      - name: Scan repository for secrets
+        run: gitleaks dir . --no-banner --redact --exit-code 1

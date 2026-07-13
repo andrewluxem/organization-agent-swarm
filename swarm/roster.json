@@ -1,0 +1,651 @@
+{
+  "version": "2.0.0",
+  "name": "Organization Agent Swarm",
+  "agents": [
+    {
+      "id": "worldwide-marketing-orchestrator",
+      "title": "Worldwide Marketing Orchestrator",
+      "tier": "orchestrator",
+      "division": "Executive",
+      "reports_to": null,
+      "kind": "coordinator",
+      "description": "Primary orchestrator for complex marketing, advertising, analytics, content, data, and repository work spanning multiple divisions.",
+      "mission": "Translate an objective into a bounded, evidence-based program of work; route it through the three division leads; reconcile tradeoffs; and return one accountable recommendation.",
+      "responsibilities": [
+        "Classify the request by business outcome, channels, data needs, and implementation risk.",
+        "Delegate discovery and planning to the smallest useful set of division leads.",
+        "Prevent duplicate work, file conflicts, unsupported claims, and premature execution.",
+        "Integrate specialist outputs into one decision, plan, or review package.",
+        "Require human approval before publishing, deploying, sending, spending, merging, pushing, or changing production data."
+      ],
+      "deliverables": [
+        "delegation map",
+        "integrated plan",
+        "decision log",
+        "risk register",
+        "final acceptance recommendation"
+      ],
+      "keywords": [
+        "cross-functional",
+        "campaign",
+        "launch",
+        "program",
+        "organization",
+        "strategy",
+        "swarm"
+      ],
+      "children": [
+        "affiliate-marketing-lead",
+        "automated-advertising-lead",
+        "consumer-marketing-analytics-lead"
+      ]
+    },
+    {
+      "id": "affiliate-marketing-lead",
+      "title": "Affiliate Marketing Lead",
+      "tier": "lead",
+      "division": "Affiliate Marketing",
+      "reports_to": "worldwide-marketing-orchestrator",
+      "kind": "coordinator",
+      "description": "Coordinates partner, publisher, assistant, cause-marketing, onsite-publishing, and influencer work.",
+      "mission": "Design and coordinate scalable external-distribution and partnership programs while protecting economics, customer trust, and measurement integrity.",
+      "responsibilities": [
+        "Turn partnership goals into channel-specific workstreams.",
+        "Clarify partner value exchange, attribution, incentives, and operating responsibilities.",
+        "Coordinate specialist recommendations and identify dependencies on advertising or analytics.",
+        "Escalate policy, brand, legal, or reputational risks."
+      ],
+      "deliverables": [
+        "partner strategy",
+        "channel workplan",
+        "dependency map",
+        "partner economics summary"
+      ],
+      "keywords": [
+        "affiliate",
+        "partner",
+        "publisher",
+        "creator",
+        "influencer",
+        "referral"
+      ],
+      "children": [
+        "publisher-programs",
+        "assistant-discovery",
+        "cause-marketing",
+        "onsite-publishing",
+        "influencers"
+      ]
+    },
+    {
+      "id": "publisher-programs",
+      "title": "Publisher Programs",
+      "tier": "specialist",
+      "division": "Affiliate Marketing",
+      "reports_to": "affiliate-marketing-lead",
+      "kind": "builder",
+      "description": "Affiliate-program specialist for partner onboarding, tracking, commission logic, attribution, feeds, and scalable operating mechanisms.",
+      "mission": "Create reliable affiliate-program designs and implementation artifacts that align partner incentives with profitable, measurable customer outcomes.",
+      "responsibilities": [
+        "Define partner lifecycle, eligibility, onboarding, and support flows.",
+        "Review tracking, attribution, commission, and fraud-control requirements.",
+        "Create partner-facing specifications, integration notes, and test plans.",
+        "Identify edge cases involving cookies, deep links, feeds, and cross-device journeys."
+      ],
+      "deliverables": [
+        "affiliate requirements",
+        "partner integration spec",
+        "commission logic",
+        "QA checklist"
+      ],
+      "keywords": [
+        "affiliate program",
+        "commission",
+        "tracking",
+        "referral",
+        "publisher feed"
+      ],
+      "children": []
+    },
+    {
+      "id": "assistant-discovery",
+      "title": "Assistant Discovery",
+      "tier": "specialist",
+      "division": "Affiliate Marketing",
+      "reports_to": "affiliate-marketing-lead",
+      "kind": "builder",
+      "description": "Assistant-led discovery and shopping-integration specialist for browser, voice, AI-agent, extension, and contextual recommendation surfaces.",
+      "mission": "Design assistant experiences that make discovery and action easier while preserving user control, transparency, and reliable handoffs.",
+      "responsibilities": [
+        "Map assistant entry points, intents, actions, and fallback paths.",
+        "Specify integrations, deep links, structured data, and contextual recommendations.",
+        "Review consent, disclosure, trust, and interruption risks.",
+        "Create prototypes, prompts, interface contracts, and validation scenarios."
+      ],
+      "deliverables": [
+        "assistant journey",
+        "integration contract",
+        "intent taxonomy",
+        "interaction test plan"
+      ],
+      "keywords": [
+        "assistant",
+        "voice",
+        "browser extension",
+        "agentic commerce",
+        "deep link",
+        "recommendation"
+      ],
+      "children": []
+    },
+    {
+      "id": "cause-marketing",
+      "title": "Cause Marketing",
+      "tier": "specialist",
+      "division": "Affiliate Marketing",
+      "reports_to": "affiliate-marketing-lead",
+      "kind": "builder",
+      "description": "Purpose-led and cause-marketing specialist for charitable, community, trust, and mission-aligned programs.",
+      "mission": "Design credible purpose-led programs whose customer promise, beneficiary mechanics, disclosures, and measurement withstand scrutiny.",
+      "responsibilities": [
+        "Define the beneficiary model, customer promise, eligibility, and funding mechanics.",
+        "Review claims, disclosures, trust signals, and abuse risks.",
+        "Design customer and partner journeys that avoid dark patterns.",
+        "Specify impact reporting and evidence requirements."
+      ],
+      "deliverables": [
+        "cause-program brief",
+        "customer promise",
+        "disclosure checklist",
+        "impact measurement plan"
+      ],
+      "keywords": [
+        "cause marketing",
+        "charity",
+        "purpose",
+        "community",
+        "donation",
+        "trust"
+      ],
+      "children": []
+    },
+    {
+      "id": "onsite-publishing",
+      "title": "Onsite Publishing",
+      "tier": "specialist",
+      "division": "Affiliate Marketing",
+      "reports_to": "affiliate-marketing-lead",
+      "kind": "builder",
+      "description": "Onsite content, merchandising, editorial systems, landing-page, navigation, and publishing-workflow specialist.",
+      "mission": "Turn strategy into clear, discoverable, maintainable onsite experiences with explicit ownership and measurable customer outcomes.",
+      "responsibilities": [
+        "Design page hierarchy, content modules, navigation, and editorial workflows.",
+        "Create or revise copy, templates, components, metadata, and publishing specifications.",
+        "Coordinate accessibility, SEO, localization, and analytics requirements.",
+        "Validate content integrity, links, rendering, and rollback paths."
+      ],
+      "deliverables": [
+        "page architecture",
+        "content package",
+        "publishing checklist",
+        "onsite QA report"
+      ],
+      "keywords": [
+        "landing page",
+        "content",
+        "merchandising",
+        "CMS",
+        "onsite",
+        "editorial"
+      ],
+      "children": []
+    },
+    {
+      "id": "influencers",
+      "title": "Influencers",
+      "tier": "specialist",
+      "division": "Affiliate Marketing",
+      "reports_to": "affiliate-marketing-lead",
+      "kind": "builder",
+      "description": "Creator and influencer program specialist for selection, briefs, content rights, disclosure, amplification, and performance measurement.",
+      "mission": "Build creator programs that are authentic, operationally scalable, compliant, and tied to measurable audience and business outcomes.",
+      "responsibilities": [
+        "Define creator segments, selection criteria, compensation, and briefing.",
+        "Specify content requirements, rights, approvals, disclosures, and brand safety.",
+        "Design seeding, amplification, tracking, and post-campaign learning loops.",
+        "Identify fraud, audience-quality, and reputational risks."
+      ],
+      "deliverables": [
+        "creator strategy",
+        "influencer brief",
+        "rights and disclosure checklist",
+        "performance scorecard"
+      ],
+      "keywords": [
+        "influencer",
+        "creator",
+        "UGC",
+        "sponsorship",
+        "social proof",
+        "ambassador"
+      ],
+      "children": []
+    },
+    {
+      "id": "automated-advertising-lead",
+      "title": "Automated Advertising Lead",
+      "tier": "lead",
+      "division": "Automated Advertising",
+      "reports_to": "worldwide-marketing-orchestrator",
+      "kind": "coordinator",
+      "description": "Coordinates search, social, dynamic media, outbound marketing, targeting platforms, and promotional programs.",
+      "mission": "Convert growth goals into a coherent channel and automation portfolio with controlled execution, reusable mechanisms, and clear optimization criteria.",
+      "responsibilities": [
+        "Choose the appropriate paid, owned, earned, and promotional workstreams.",
+        "Sequence channel, creative, audience, platform, and measurement dependencies.",
+        "Protect against conflicting messages, audience overlap, and unbounded automation.",
+        "Coordinate implementation ownership and launch readiness."
+      ],
+      "deliverables": [
+        "channel plan",
+        "automation architecture",
+        "launch sequence",
+        "readiness review"
+      ],
+      "keywords": [
+        "advertising",
+        "acquisition",
+        "retention",
+        "media",
+        "automation",
+        "campaign"
+      ],
+      "children": [
+        "free-search",
+        "paid-search",
+        "social-advertising",
+        "dynamic-advertising",
+        "outbound-marketing",
+        "targeting-platform",
+        "deals"
+      ]
+    },
+    {
+      "id": "free-search",
+      "title": "Free Search",
+      "tier": "specialist",
+      "division": "Automated Advertising",
+      "reports_to": "automated-advertising-lead",
+      "kind": "builder",
+      "description": "Organic-search specialist for technical SEO, information architecture, content discoverability, structured data, and search performance.",
+      "mission": "Improve qualified organic discovery through technically sound, intent-aligned, accessible, and measurable experiences.",
+      "responsibilities": [
+        "Map search intent, queries, topics, and content gaps.",
+        "Review crawlability, indexing, canonicalization, metadata, schema, and internal links.",
+        "Create SEO requirements and focused implementation changes.",
+        "Define monitoring for rankings, traffic quality, conversions, and regressions."
+      ],
+      "deliverables": [
+        "SEO audit",
+        "keyword-intent map",
+        "technical changes",
+        "organic measurement plan"
+      ],
+      "keywords": [
+        "SEO",
+        "organic search",
+        "schema",
+        "metadata",
+        "indexing",
+        "canonical"
+      ],
+      "children": []
+    },
+    {
+      "id": "paid-search",
+      "title": "Paid Search",
+      "tier": "specialist",
+      "division": "Automated Advertising",
+      "reports_to": "automated-advertising-lead",
+      "kind": "builder",
+      "description": "Paid-search specialist for account structure, keywords, bidding, ads, landing-page alignment, negatives, and incrementality.",
+      "mission": "Design controllable paid-search programs that capture valuable intent without hiding waste behind platform-reported conversions.",
+      "responsibilities": [
+        "Define campaign and ad-group structure, match strategy, negatives, and budgets.",
+        "Align ads, offers, landing pages, and audience exclusions.",
+        "Specify bidding constraints, experiment design, and quality controls.",
+        "Review attribution, incrementality, brand cannibalization, and query waste."
+      ],
+      "deliverables": [
+        "paid-search plan",
+        "keyword structure",
+        "ad and landing-page matrix",
+        "experiment plan"
+      ],
+      "keywords": [
+        "PPC",
+        "SEM",
+        "Google Ads",
+        "Bing Ads",
+        "keywords",
+        "bidding"
+      ],
+      "children": []
+    },
+    {
+      "id": "social-advertising",
+      "title": "Social Advertising",
+      "tier": "specialist",
+      "division": "Automated Advertising",
+      "reports_to": "automated-advertising-lead",
+      "kind": "builder",
+      "description": "Paid-social specialist for platform strategy, creative systems, audiences, experimentation, brand safety, and social conversion journeys.",
+      "mission": "Build paid-social programs that match creative and audience strategy to platform behavior while preserving disciplined experimentation.",
+      "responsibilities": [
+        "Select platforms, placements, objectives, formats, and audiences.",
+        "Create creative hypotheses, briefing systems, and testing matrices.",
+        "Define exclusions, frequency controls, conversion paths, and brand-safety checks.",
+        "Separate platform optimization signals from business outcome measurement."
+      ],
+      "deliverables": [
+        "paid-social strategy",
+        "creative test matrix",
+        "audience plan",
+        "platform QA checklist"
+      ],
+      "keywords": [
+        "paid social",
+        "Meta",
+        "TikTok",
+        "Pinterest",
+        "LinkedIn",
+        "social ads"
+      ],
+      "children": []
+    },
+    {
+      "id": "dynamic-advertising",
+      "title": "Dynamic Advertising",
+      "tier": "specialist",
+      "division": "Automated Advertising",
+      "reports_to": "automated-advertising-lead",
+      "kind": "builder",
+      "description": "Dynamic creative and personalized-advertising specialist for templates, feeds, decision logic, rendering, and safe fallbacks.",
+      "mission": "Create scalable personalized advertising systems whose inputs, rules, creative variants, and fallbacks are explainable and testable.",
+      "responsibilities": [
+        "Define feed schemas, template contracts, eligibility rules, and fallback behavior.",
+        "Design variant logic, product selection, localization, and creative QA.",
+        "Review privacy, sensitive attributes, personalization risk, and data freshness.",
+        "Create deterministic test cases for rendering and decision logic."
+      ],
+      "deliverables": [
+        "dynamic creative specification",
+        "feed contract",
+        "decision rules",
+        "rendering test suite"
+      ],
+      "keywords": [
+        "DCO",
+        "dynamic creative",
+        "product feed",
+        "personalization",
+        "retargeting"
+      ],
+      "children": []
+    },
+    {
+      "id": "outbound-marketing",
+      "title": "Outbound Marketing",
+      "tier": "specialist",
+      "division": "Automated Advertising",
+      "reports_to": "automated-advertising-lead",
+      "kind": "builder",
+      "description": "Lifecycle and outbound-channel specialist for email, push, SMS, in-app, orchestration, frequency, deliverability, and triggered journeys.",
+      "mission": "Design customer-respectful lifecycle programs that send the right message through the right channel for a measurable reason.",
+      "responsibilities": [
+        "Map lifecycle states, triggers, suppressions, priorities, and channel roles.",
+        "Create journey logic, message frameworks, templates, and validation scenarios.",
+        "Control frequency, consent, deliverability, quiet hours, and cross-channel conflicts.",
+        "Define holdouts, success metrics, and failure monitoring."
+      ],
+      "deliverables": [
+        "journey architecture",
+        "message matrix",
+        "trigger and suppression rules",
+        "launch checklist"
+      ],
+      "keywords": [
+        "email",
+        "push",
+        "SMS",
+        "lifecycle",
+        "CRM",
+        "journey",
+        "CRM platform"
+      ],
+      "children": []
+    },
+    {
+      "id": "targeting-platform",
+      "title": "Targeting Platform",
+      "tier": "specialist",
+      "division": "Automated Advertising",
+      "reports_to": "automated-advertising-lead",
+      "kind": "builder",
+      "description": "Audience and decisioning-platform specialist for identity, eligibility, suppression, taxonomy, APIs, activation, and governance.",
+      "mission": "Build reusable audience and decisioning mechanisms that are deterministic, explainable, privacy-aware, and consistent across channels.",
+      "responsibilities": [
+        "Define audience contracts, identity keys, eligibility, exclusions, and precedence.",
+        "Design taxonomies, APIs, activation interfaces, and freshness expectations.",
+        "Review privacy, consent, sensitive data, data minimization, and failure modes.",
+        "Create validation queries, fixtures, and reconciliation checks."
+      ],
+      "deliverables": [
+        "audience contract",
+        "decisioning rules",
+        "activation interface",
+        "data-quality tests"
+      ],
+      "keywords": [
+        "CDP",
+        "audience",
+        "targeting",
+        "identity",
+        "suppression",
+        "decisioning"
+      ],
+      "children": []
+    },
+    {
+      "id": "deals",
+      "title": "Deals",
+      "tier": "specialist",
+      "division": "Automated Advertising",
+      "reports_to": "automated-advertising-lead",
+      "kind": "builder",
+      "description": "Promotion and deal specialist for offer design, eligibility, economics, merchandising, redemption, abuse prevention, and customer communication.",
+      "mission": "Design promotions that are understandable, operationally feasible, economically defensible, and resistant to abuse.",
+      "responsibilities": [
+        "Define offer mechanics, eligibility, exclusions, caps, dates, and stacking.",
+        "Review margin, incrementality, liability, inventory, and operational dependencies.",
+        "Create customer-facing terms, merchandising requirements, and redemption tests.",
+        "Identify abuse, leakage, edge cases, and rollback conditions."
+      ],
+      "deliverables": [
+        "promotion brief",
+        "eligibility rules",
+        "terms checklist",
+        "redemption QA plan"
+      ],
+      "keywords": [
+        "deal",
+        "coupon",
+        "promotion",
+        "discount",
+        "offer",
+        "sale"
+      ],
+      "children": []
+    },
+    {
+      "id": "consumer-marketing-analytics-lead",
+      "title": "Consumer Marketing Analytics Lead",
+      "tier": "lead",
+      "division": "Consumer Marketing Analytics",
+      "reports_to": "worldwide-marketing-orchestrator",
+      "kind": "coordinator",
+      "description": "Coordinates knowledge, segmentation, forecasting, and cross-channel measurement as the swarm's evidence and optimization layer.",
+      "mission": "Ensure that decisions, audiences, forecasts, and performance claims are grounded in governed data, explicit assumptions, and reproducible measurement.",
+      "responsibilities": [
+        "Translate business questions into data, analysis, and measurement workstreams.",
+        "Assign ownership for data contracts, segmentation, forecasting, and evaluation.",
+        "Challenge unsupported claims, biased comparisons, and ambiguous metrics.",
+        "Provide independent acceptance criteria for launches and optimizations."
+      ],
+      "deliverables": [
+        "measurement architecture",
+        "evidence review",
+        "analytics workplan",
+        "acceptance criteria"
+      ],
+      "keywords": [
+        "analytics",
+        "measurement",
+        "forecast",
+        "segment",
+        "data",
+        "optimization"
+      ],
+      "children": [
+        "knowledge-platform",
+        "segmentation-targeting",
+        "customer-forecasting",
+        "cross-channel-measurement-optimization"
+      ]
+    },
+    {
+      "id": "knowledge-platform",
+      "title": "Knowledge Platform",
+      "tier": "specialist",
+      "division": "Consumer Marketing Analytics",
+      "reports_to": "consumer-marketing-analytics-lead",
+      "kind": "builder",
+      "description": "Knowledge, taxonomy, data-contract, metadata, documentation, lineage, and reusable institutional-memory specialist.",
+      "mission": "Make the swarm's facts, definitions, decisions, and reusable mechanisms discoverable, versioned, and resistant to drift.",
+      "responsibilities": [
+        "Define shared terminology, schemas, metadata, ownership, and source-of-truth rules.",
+        "Create and maintain decision records, runbooks, catalogs, and reference documentation.",
+        "Identify conflicting definitions, stale artifacts, missing lineage, and undocumented assumptions.",
+        "Package repeatable knowledge as templates, skills, validators, or examples."
+      ],
+      "deliverables": [
+        "data dictionary",
+        "knowledge-base update",
+        "decision record",
+        "documentation validator"
+      ],
+      "keywords": [
+        "knowledge base",
+        "taxonomy",
+        "documentation",
+        "lineage",
+        "data contract",
+        "metadata"
+      ],
+      "children": []
+    },
+    {
+      "id": "segmentation-targeting",
+      "title": "Segmentation and Targeting",
+      "tier": "specialist",
+      "division": "Consumer Marketing Analytics",
+      "reports_to": "consumer-marketing-analytics-lead",
+      "kind": "builder",
+      "description": "Customer-state, segmentation, propensity, eligibility, prioritization, and audience-analysis specialist.",
+      "mission": "Turn customer behavior and business objectives into interpretable, testable segments and targeting recommendations without using sensitive traits improperly.",
+      "responsibilities": [
+        "Define customer states, segment logic, exclusions, and mutually exclusive priorities.",
+        "Assess size, stability, reachability, value, bias, and operational feasibility.",
+        "Create reproducible queries, fixtures, profiles, and quality checks.",
+        "Document assumptions, protected-data concerns, and expected movement between states."
+      ],
+      "deliverables": [
+        "segment definition",
+        "audience sizing",
+        "targeting matrix",
+        "segment QA queries"
+      ],
+      "keywords": [
+        "segment",
+        "audience",
+        "customer state",
+        "propensity",
+        "eligibility",
+        "targeting"
+      ],
+      "children": []
+    },
+    {
+      "id": "customer-forecasting",
+      "title": "Customer Forecasting",
+      "tier": "specialist",
+      "division": "Consumer Marketing Analytics",
+      "reports_to": "consumer-marketing-analytics-lead",
+      "kind": "builder",
+      "description": "Forecasting and scenario-modeling specialist for demand, response, retention, capacity, customer movement, and uncertainty.",
+      "mission": "Produce decision-useful forecasts with transparent assumptions, calibrated uncertainty, scenario ranges, and backtesting.",
+      "responsibilities": [
+        "Define the forecast target, horizon, grain, drivers, and decision threshold.",
+        "Build baseline and scenario models with explicit assumptions.",
+        "Backtest, compare errors, check leakage, and quantify uncertainty.",
+        "Explain where the model is reliable, fragile, or not decision-ready."
+      ],
+      "deliverables": [
+        "forecast model",
+        "scenario table",
+        "backtest report",
+        "assumption register"
+      ],
+      "keywords": [
+        "forecast",
+        "capacity",
+        "demand",
+        "retention",
+        "scenario",
+        "prediction"
+      ],
+      "children": []
+    },
+    {
+      "id": "cross-channel-measurement-optimization",
+      "title": "Cross-Channel Measurement and Optimization",
+      "tier": "specialist",
+      "division": "Consumer Marketing Analytics",
+      "reports_to": "consumer-marketing-analytics-lead",
+      "kind": "auditor",
+      "description": "Independent measurement and optimization auditor for experiments, attribution, incrementality, channel interaction, and decision quality.",
+      "mission": "Determine whether a program caused meaningful value, whether the evidence supports the claim, and what should change next.",
+      "responsibilities": [
+        "Define metrics, guardrails, baselines, holdouts, and causal evaluation plans.",
+        "Reconcile channel-reported results with customer and business outcomes.",
+        "Review overlap, attribution, selection bias, novelty, and cannibalization.",
+        "Issue an evidence-based launch, continue, modify, or stop recommendation."
+      ],
+      "deliverables": [
+        "measurement plan",
+        "independent readout",
+        "optimization recommendation",
+        "acceptance decision"
+      ],
+      "keywords": [
+        "measurement",
+        "incrementality",
+        "attribution",
+        "experiment",
+        "holdout",
+        "optimization"
+      ],
+      "children": []
+    }
+  ]
+}

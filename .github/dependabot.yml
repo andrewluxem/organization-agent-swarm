@@ -1,0 +1,35 @@
+# Dependabot configuration for Organization Agent Swarm.
+# Scope: documentation tooling only (pip and npm under /web) plus the GitHub
+# Actions used by the validation workflow. Updates are grouped and weekly.
+# Automatic merging is NOT enabled; every update is reviewed by a human.
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/web"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      docs-python:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "npm"
+    directory: "/web"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      docs-node:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      github-actions:
+        patterns:
+          - "*"
