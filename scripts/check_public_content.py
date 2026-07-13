@@ -164,11 +164,29 @@ def check_terms(files: list[str], v: Violations) -> None:
                     v.add("tracking", rel, i, f"analytics/tracking signature {pat.pattern!r}")
 
 
+# Approved GitHub Pages phase lift: the ONLY sanctioned active site_url is the
+# canonical GitHub Pages project URL below. Any other active site_url, a second
+# active site_url, an empty/malformed value, a custom domain, or a CNAME remains
+# a violation. Analytics/tracking (check_terms) and non-Pages deployment
+# permissions (check_workflows) remain forbidden.
+ALLOWED_SITE_URL = "https://andrewluxem.github.io/organization-agent-swarm/"
+
+
 def check_site_url_and_domains(files: list[str], v: Violations) -> None:
-    # No active site_url in mkdocs.yml (a commented line is allowed).
+    # Exactly one active site_url is allowed, and only the canonical Pages URL.
+    # (A commented "# site_url:" line does not match and is ignored.)
+    active_site_urls = 0
     for i, line in enumerate(read_lines("web/mkdocs.yml"), start=1):
-        if re.match(r"\s*site_url\s*:", line):
-            v.add("site_url", "web/mkdocs.yml", i, "active site_url key is not allowed in this phase")
+        m = re.match(r"\s*site_url\s*:\s*(.*?)\s*$", line)
+        if not m:
+            continue
+        active_site_urls += 1
+        value = m.group(1).strip().strip('"').strip("'")
+        if active_site_urls > 1:
+            v.add("site_url", "web/mkdocs.yml", i, "multiple active site_url keys are not allowed")
+        elif value != ALLOWED_SITE_URL:
+            v.add("site_url", "web/mkdocs.yml", i,
+                  "site_url must be exactly the canonical GitHub Pages project URL")
     # No CNAME / custom-domain files anywhere (tracked or built).
     for rel in files:
         if Path(rel).name == "CNAME":
@@ -185,6 +203,20 @@ PAGES_DEPLOY_TOKENS = [
 ]
 
 
+# Approved GitHub Pages phase lift: the official artifact-based Pages workflow
+# below is the ONLY place these specific official constructs are sanctioned.
+# Everywhere else (including validate.yml) they remain violations. Third-party
+# deployment (peaceiris/actions-gh-pages), "deployments: write", PATs, secrets,
+# gh-pages branch publishing, and pull_request_target remain forbidden even in
+# the sanctioned workflow (they are absent from the sanctioned set below).
+SANCTIONED_PAGES_WORKFLOW = ".github/workflows/pages.yml"
+SANCTIONED_PAGES_TOKENS = {
+    "deploy-pages", "actions/deploy-pages",
+    "upload-pages-artifact",
+    "pages: write", "id-token: write",
+}
+
+
 def check_workflows(v: Violations) -> None:
     wf_dir = ROOT / ".github" / "workflows"
     if not wf_dir.exists():
@@ -194,6 +226,8 @@ def check_workflows(v: Violations) -> None:
         for i, line in enumerate(wf.read_text(encoding="utf-8").splitlines(), start=1):
             for token in PAGES_DEPLOY_TOKENS:
                 if token in line:
+                    if rel == SANCTIONED_PAGES_WORKFLOW and token in SANCTIONED_PAGES_TOKENS:
+                        continue  # approved official Pages construct in the sanctioned workflow
                     v.add("pages-deploy", rel, i, f"forbidden deployment/permission token {token!r}")
 
 

@@ -1,0 +1,82 @@
+# GitHub Pages build-and-deploy for Organization Agent Swarm.
+#
+# - Build runs on pushes to main, pull requests (build-only validation), and
+#   manual dispatch. It builds the MkDocs site from source and uploads web/site
+#   as the Pages artifact. No generated output is committed; no gh-pages branch.
+# - Deploy runs ONLY for pushes to main or an explicit workflow_dispatch on
+#   main. It never runs for pull requests. It uses the github-pages environment
+#   and the official actions/deploy-pages action.
+#
+# Least privilege: the build job is read-only; only the deploy job holds
+# pages: write and id-token: write. Every third-party action is pinned to a full
+# commit SHA; the trailing comment records the verified official release tag.
+name: pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Least privilege by default; the deploy job elevates narrowly.
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build documentation site
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: "3.12"
+      - name: Install documentation dependencies
+        run: python -m pip install -r web/requirements-docs.txt
+      - name: Generator and structural validation
+        run: |
+          python3 scripts/build_adapters.py --check
+          python3 scripts/build_docs.py --check
+          python3 scripts/validate_swarm.py
+          python3 scripts/check_public_content.py
+      - name: Strict documentation build
+        run: mkdocs build --strict -f web/mkdocs.yml
+      - name: Configure Pages
+        # Skipped on pull requests: reading the Pages configuration requires Pages
+        # to be enabled, which is a separate, later authorization. PR runs stay
+        # build-only validation.
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: web/site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    # Deploy only from main, and only for a push or an explicit manual dispatch.
+    # Never runs for pull_request events.
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    # Serialize production deployments; never cancel one already in progress.
+    concurrency:
+      group: pages-production
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
