@@ -2,5 +2,5 @@
 # Static-site only: MkDocs + Material theme + PyMdown extensions.
 # No Node, no JavaScript build system, no analytics, no external fonts.
 mkdocs==1.6.1
-mkdocs-material==9.7.6
+mkdocs-material==9.7.7
 pymdown-extensions==11.0.1
