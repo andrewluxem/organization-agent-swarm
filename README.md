@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/banner.svg" alt="organization-agent-swarm: An independent, portable 20-agent team modeled as a worldwide marketing and advertising organization, built from capability-oriented patterns for use with multiple coding-agent clients." width="100%"></p>
+
 # Organization Agent Swarm
 
 A portable 20-agent team modeled as a worldwide marketing & advertising
